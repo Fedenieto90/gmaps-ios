@@ -12,9 +12,11 @@ import SwiftyJSON
 class TransitDetail: NSObject {
     
     var arrivalStopName : String
+    var line : Line
     
     init(data: JSON) {
         self.arrivalStopName = data["arrival_stop"]["name"].stringValue
+        self.line = Line(data: data["line"] as JSON)
     }
 
 }
