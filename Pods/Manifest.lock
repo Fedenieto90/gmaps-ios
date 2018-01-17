@@ -1,0 +1,56 @@
+PODS:
+  - CocoaLumberjack (3.3.0):
+    - CocoaLumberjack/Default (= 3.3.0)
+    - CocoaLumberjack/Extensions (= 3.3.0)
+  - CocoaLumberjack/Default (3.3.0)
+  - CocoaLumberjack/Extensions (3.3.0):
+    - CocoaLumberjack/Default
+  - GoogleMaps (2.5.0):
+    - GoogleMaps/Maps (= 2.5.0)
+  - GoogleMaps/Base (2.5.0)
+  - GoogleMaps/Maps (2.5.0):
+    - GoogleMaps/Base
+  - GooglePlaces (2.5.0):
+    - GoogleMaps/Base (= 2.5.0)
+  - Macaw (0.9.1):
+    - SWXMLHash
+  - Networking (4.1.1)
+  - Pulley (2.2.3)
+  - SVGKit (2.0.1):
+    - CocoaLumberjack (~> 3.x)
+  - SwiftyJSON (4.0.0)
+  - SWXMLHash (4.2.5)
+
+DEPENDENCIES:
+  - GoogleMaps
+  - GooglePlaces
+  - Macaw (= 0.9.1)
+  - Networking
+  - Pulley
+  - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
+  - SwiftyJSON
+
+EXTERNAL SOURCES:
+  SVGKit:
+    :branch: 2.x
+    :git: https://github.com/SVGKit/SVGKit.git
+
+CHECKOUT OPTIONS:
+  SVGKit:
+    :commit: 51b6f534b09236acfe04d520336a05a1096e67ae
+    :git: https://github.com/SVGKit/SVGKit.git
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: 3c8c74683302f9012bb168e1c4b7ae3c0b558431
+  GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
+  GooglePlaces: dd70d9d71ea1c7944846afe67de3712c99b30a77
+  Macaw: 8b13bb7ae2f527b3c7b2787988bbc5461a1c66e3
+  Networking: ffde5754883907f90f9f751e183eba4a75dc4b89
+  Pulley: 6574f1784f9d2ef75ae6b2a2f1304b7e2b4a8df1
+  SVGKit: 4055d9e809b5db8633755979cfb3b02dc5a8c20d
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  SWXMLHash: eb16013c6f654853980822e0a778c9d66e017dde
+
+PODFILE CHECKSUM: 634bf5a12f0ca44409bed79dd524801b84324630
+
+COCOAPODS: 1.3.1
