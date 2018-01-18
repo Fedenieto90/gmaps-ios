@@ -53,6 +53,8 @@ class Leg: NSObject {
         self.departureTimeText = data["departure_time"]["text"].stringValue
         self.departureTimeValue = data["departure_time"]["value"].doubleValue
         self.departureTimeTimezone = data["departure_time"]["time_zone"].doubleValue
+        
+        //Steps
         var stepItems = [Step]()
         for step in data["steps"].arrayValue {
             let stepItem = Step(data: step)

@@ -14,6 +14,8 @@ private struct Keys {
     static let overviewPolyline = "overview_polyline"
     static let points = "points"
     static let legs = "legs"
+    static let summary = "summary"
+    static let warnings = "warnings"
 }
 
 class Route: NSObject {
@@ -27,7 +29,7 @@ class Route: NSObject {
     init(data : JSON) {
         self.copyrights = data[Keys.copyrights].stringValue
         self.overviewPolylinePoints = data[Keys.overviewPolyline][Keys.points].stringValue
-        self.summary = data["summary"].stringValue
+        self.summary = data[Keys.summary].stringValue
         
         //Legs
         var legItems = [Leg]()
@@ -39,7 +41,7 @@ class Route: NSObject {
         
         //Warnings
         var warningItems = [String]()
-        for warning in data["warnings"].arrayValue {
+        for warning in data[Keys.warnings].arrayValue {
             warningItems.append(warning.stringValue)
         }
         self.warnings = warningItems
