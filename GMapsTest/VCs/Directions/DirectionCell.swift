@@ -10,6 +10,8 @@ import UIKit
 
 class DirectionCell: UICollectionViewCell {
     
+    @IBOutlet weak var busLineLbl: UILabel!
+    @IBOutlet weak var busLineColor: UIView!
     @IBOutlet weak var instructionLbl: UILabel!
     @IBOutlet weak var durationLbl: UILabel!
     @IBOutlet weak var distanceLbl: UILabel!

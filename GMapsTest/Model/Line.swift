@@ -12,10 +12,12 @@ import SwiftyJSON
 class Line: NSObject {
     
     var name : String
-    var lineNumber : String
+    var number : String
+    var color : UIColor
 
     init(data: JSON) {
         self.name = data["name"].stringValue
-        self.lineNumber = data["short_name"].stringValue
+        self.number = data["short_name"].stringValue
+        self.color = UIColor().hexStringToUIColor(hex: data["color"].stringValue)
     }
 }

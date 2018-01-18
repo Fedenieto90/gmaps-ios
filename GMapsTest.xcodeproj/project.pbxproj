@@ -10,6 +10,7 @@
 		3B9FA33AA85C6756A92B3F0B /* Pods_GMapsTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DAB65B2C73CAE042F81FA09 /* Pods_GMapsTestTests.framework */; };
 		5009AD9BD3D16243E76EAF1A /* Pods_GMapsTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D04C8F6BFAE9F4E962E35F0C /* Pods_GMapsTest.framework */; };
 		8B09637A200FE3150063C95D /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B096379200FE3150063C95D /* Line.swift */; };
+		8B09637C2010E7A50063C95D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09637B2010E7A50063C95D /* UIColor.swift */; };
 		8B99A37C20090DF00088B849 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B99A37B20090DF00088B849 /* Map.storyboard */; };
 		8B99A37E20090E040088B849 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99A37D20090E040088B849 /* MapVC.swift */; };
 		8B99A382200927000088B849 /* argentinaLow.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8B99A381200927000088B849 /* argentinaLow.svg */; };
@@ -63,6 +64,7 @@
 		6E1B3ADCC0BE05163E4EA4F2 /* Pods-GMapsTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMapsTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GMapsTest/Pods-GMapsTest.debug.xcconfig"; sourceTree = "<group>"; };
 		700666D7880DD04353AA26AA /* Pods-GMapsTestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GMapsTestUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GMapsTestUITests/Pods-GMapsTestUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8B096379200FE3150063C95D /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		8B09637B2010E7A50063C95D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		8B99A37B20090DF00088B849 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		8B99A37D20090E040088B849 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		8B99A381200927000088B849 /* argentinaLow.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = argentinaLow.svg; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				8BFDBC912006A6FD004F7230 /* area.png */,
 				8BFDBC8620068417004F7230 /* gMapsSilverTheme.json */,
 				8BFDBC88200693AE004F7230 /* GradientView.swift */,
+				8B09637B2010E7A50063C95D /* UIColor.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -204,8 +207,8 @@
 		8B99A3712007B95F0088B849 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8BF1E2BB20066278002B5A3F /* Step.swift */,
 				8BE6802E200D34FD00CAA057 /* Province.swift */,
+				8BF1E2BB20066278002B5A3F /* Step.swift */,
 				8BF8800C200FCDE1008132D8 /* Route.swift */,
 				8BF8800E200FD49E008132D8 /* Leg.swift */,
 				8BF88010200FDC50008132D8 /* TransitDetail.swift */,
@@ -608,6 +611,7 @@
 				8BFDBC89200693AE004F7230 /* GradientView.swift in Sources */,
 				8BE6802B200CF6AE00CAA057 /* DetailVC.swift in Sources */,
 				8BFA26D02005264B00340E5B /* DirectionCell.swift in Sources */,
+				8B09637C2010E7A50063C95D /* UIColor.swift in Sources */,
 				8BE6802D200D2C6D00CAA057 /* BottomSheetVC.swift in Sources */,
 				8BE68037200F9F8700CAA057 /* PageViewController.swift in Sources */,
 				8B99A37E20090E040088B849 /* MapVC.swift in Sources */,

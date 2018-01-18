@@ -9,18 +9,39 @@
 import UIKit
 import SwiftyJSON
 
+private struct Keys {
+    static let copyrights = "copyrights"
+    static let overviewPolyline = "overview_polyline"
+    static let points = "points"
+    static let legs = "legs"
+}
+
 class Route: NSObject {
 
     var copyrights : String
+    var overviewPolylinePoints : String
+    var summary : String
+    var warnings : [String]
     var legs : [Leg]
     
     init(data : JSON) {
-        self.copyrights = data["copyrights"].stringValue
+        self.copyrights = data[Keys.copyrights].stringValue
+        self.overviewPolylinePoints = data[Keys.overviewPolyline][Keys.points].stringValue
+        self.summary = data["summary"].stringValue
+        
+        //Legs
         var legItems = [Leg]()
-        for leg in data["legs"].arrayValue {
+        for leg in data[Keys.legs].arrayValue {
             let legItem = Leg(data: leg)
             legItems.append(legItem)
         }
         self.legs = legItems
+        
+        //Warnings
+        var warningItems = [String]()
+        for warning in data["warnings"].arrayValue {
+            warningItems.append(warning.stringValue)
+        }
+        self.warnings = warningItems
     }
 }

@@ -10,6 +10,12 @@ import UIKit
 import GoogleMaps
 
 class ViewController: UIViewController, UIScrollViewDelegate {
+    
+    var originLat = 39.5975014
+    var originLong = 2.644017
+    
+    var destinationLat = 39.6080321
+    var destinationLong = 2.6448371
 
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -21,8 +27,12 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                            navigationMode.transit,
                            navigationMode.walking]
     
+    var selectedNavMode = navigationMode.driving
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var navigationModeCollectionView: UICollectionView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,30 +45,18 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         self.navigationModeCollectionView.reloadData()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    
     func setMap() {
         
         // Update camera to fit start and end pois
-        let startPoint = CLLocationCoordinate2D(latitude: 39.606678, longitude: 2.644017)
-        let endPoint = CLLocationCoordinate2D(latitude: 39.6080321,longitude: 2.6448371)
+        let startPoint = CLLocationCoordinate2D(latitude: originLat, longitude: originLong)
+        let endPoint = CLLocationCoordinate2D(latitude: destinationLat,longitude: destinationLong)
         let bounds = GMSCoordinateBounds(coordinate: startPoint, coordinate: endPoint)
-        let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 100)
+        let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 150)
+        
         mapView.animate(with: cameraUpdate)
        
-        // Creates a start marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: 39.5975014, longitude: 2.6405995)
-        marker.title = "Son espases"
-        marker.map = mapView
-        
-        // Creates an end marker
-        let endMarker = GMSMarker()
-        endMarker.position = CLLocationCoordinate2D(latitude: 39.6080321, longitude: 2.6448371)
-        endMarker.title = "Café"
-        endMarker.map = mapView
+        //Set up markers
+        setMarkers()
         
         //Set Map Style
         setMapStyle()
@@ -66,6 +64,20 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         //MapView Delegate
         mapView.delegate = self
         
+    }
+    
+    func setMarkers() {
+        
+        // Creates a start marker in the center of the map.
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: originLat, longitude: originLong)
+        marker.map = mapView
+        
+        // Creates an end marker
+        let endMarker = GMSMarker()
+        endMarker.position = CLLocationCoordinate2D(latitude: destinationLat, longitude: destinationLong)
+        endMarker.title = "Son Espases"
+        endMarker.map = mapView
     }
     
     func setMapStyle() {
@@ -82,13 +94,29 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func getDirections(navMode : String) {
-        DirectionsAPI.shared.getDirections(navigationMode : navMode) { (points, steps) in
-            //Draw route
-            self.drawRoute(points: points)
-            //Store steps
-            self.steps = steps
-            //Store each step path polyline
-            self.prepareSteps(steps: self.steps)
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        DirectionsAPI.shared.getDirections(originLat: originLat,
+                                           originLong: originLong,
+                                           destinationLat: destinationLat ,
+                                           destinationLong:  destinationLong,
+                                           navigationMode : navMode) { (route, error) in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            if error == nil {
+                if route != nil {
+                    //Show route on map
+                    self.drawRoute(points: [(route?.overviewPolylinePoints)!])
+                    //Store steps
+                    self.steps = (route?.legs.first?.steps)!
+                    //Store each step path polyline
+                    self.prepareSteps(steps: self.steps)
+                } else {
+                    print("Error")
+                }
+               
+            } else {
+                //Handle error
+                print("Error while trying to get directions")
+            }
         }
     }
     
@@ -100,6 +128,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             polyline.strokeColor = UIColor.red
             polyline.map = self.mapView
         }
+        setMarkers()
     }
     
     func prepareSteps(steps : [Step]) {
@@ -125,7 +154,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     //MARK : - Actions
     
     @IBAction func didTapOpenGMaps(_ sender: Any) {
-        let url = URL(string : "comgooglemaps://?saddr=-33.878518,151.19954180&daddr=-33.877755,151.1984537&directionsmode=walking")!
+        let url = URL(string : "comgooglemaps://?saddr=\(originLat),\(originLong)&daddr=\(destinationLat),\(destinationLong)&directionsmode=\(selectedNavMode.rawValue)")!
         UIApplication.shared.open(url, options: ["":""], completionHandler: nil)
     }
 }
@@ -153,8 +182,10 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "directionCell", for: indexPath) as! DirectionCell
             let htmlDirection = steps[indexPath.row].instruction
-            cell.durationLbl.text = steps[indexPath.row].duration
-            cell.distanceLbl.text = steps[indexPath.row].distance
+            cell.durationLbl.text = steps[indexPath.row].durationText
+            cell.distanceLbl.text = steps[indexPath.row].distanceText
+            cell.busLineLbl.text = steps[indexPath.row].transitDetail?.line.number
+            cell.busLineColor.backgroundColor = steps[indexPath.row].transitDetail?.line.color
             do {
                 let attrStr = try NSAttributedString(
                     data: htmlDirection.data(using: String.Encoding.unicode, allowLossyConversion: true)!,
@@ -165,7 +196,6 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
             } catch let error {
                 print(error)
             }
-            
             return cell
         }
        
@@ -175,18 +205,9 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
         if collectionView == navigationModeCollectionView {
             //Get directions for the selected navigation mode
             let navMode = navigationModes[indexPath.row].rawValue
+            selectedNavMode = navigationModes[indexPath.row]
             getDirections(navMode: navMode)
         } else {
-            //Recalculate route from that point in the map
-//            let path = GMSMutablePath()
-//            let step = steps[indexPath.row]
-//            path.add(CLLocationCoordinate2D(latitude: step.startLocationLat,
-//                                                longitude: step.startLocationLong))
-//            path.add(CLLocationCoordinate2D(latitude: step.endLocationLat,
-//                                            longitude: step.endLocationLong))
-//            let polyline = GMSPolyline.init(path: path)
-//            polyline.strokeWidth = 5
-//            polyline.strokeColor = UIColor.red.withAlphaComponent(0.5)
             
         }
     }
@@ -230,6 +251,10 @@ extension ViewController : GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         //User tapped at coordinate
+        self.originLat = coordinate.latitude
+        self.originLong = coordinate.longitude
+        mapView.clear()
+        getDirections(navMode: selectedNavMode.rawValue)
     }
 }
 

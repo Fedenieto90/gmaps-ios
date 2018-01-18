@@ -108,19 +108,39 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RuJ-ka-dSX">
+                                                    <rect key="frame" x="66.5" y="48.5" width="38" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s2i-s2-7SC">
+                                                    <rect key="frame" x="67" y="72.5" width="38" height="2"/>
+                                                    <color key="backgroundColor" red="0.13333334029999999" green="0.40784314269999999" blue="0.60784316059999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="2" id="bL1-PW-5hA"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Y6f-SO-4LE" firstAttribute="leading" secondItem="BS3-RG-sPE" secondAttribute="leading" constant="20" id="2fr-4h-hFG"/>
+                                            <constraint firstItem="s2i-s2-7SC" firstAttribute="top" secondItem="RuJ-ka-dSX" secondAttribute="bottom" id="4qn-a1-NbY"/>
+                                            <constraint firstItem="s2i-s2-7SC" firstAttribute="trailing" secondItem="RuJ-ka-dSX" secondAttribute="trailing" id="Cnt-E9-M98"/>
                                             <constraint firstItem="Y6f-SO-4LE" firstAttribute="top" secondItem="BS3-RG-sPE" secondAttribute="top" constant="20" id="I8k-Sh-Vxn"/>
+                                            <constraint firstItem="RuJ-ka-dSX" firstAttribute="centerX" secondItem="BS3-RG-sPE" secondAttribute="centerX" id="bof-qn-RyE"/>
                                             <constraint firstItem="tcc-Q6-Awm" firstAttribute="leading" secondItem="BS3-RG-sPE" secondAttribute="leading" constant="10" id="cG0-f3-VSD"/>
                                             <constraint firstAttribute="bottom" secondItem="tcc-Q6-Awm" secondAttribute="bottom" constant="10" id="fY4-pA-wMv"/>
                                             <constraint firstAttribute="trailing" secondItem="Y6f-SO-4LE" secondAttribute="trailing" constant="20" id="hXC-F1-Gr7"/>
+                                            <constraint firstItem="RuJ-ka-dSX" firstAttribute="centerY" secondItem="BS3-RG-sPE" secondAttribute="centerY" id="l7R-uj-wsf"/>
                                             <constraint firstAttribute="bottom" secondItem="Hni-1D-ZdP" secondAttribute="bottom" constant="10" id="l9W-5l-8Q4"/>
                                             <constraint firstAttribute="trailing" secondItem="Hni-1D-ZdP" secondAttribute="trailing" constant="10" id="sLH-dS-2Nf"/>
+                                            <constraint firstItem="s2i-s2-7SC" firstAttribute="leading" secondItem="RuJ-ka-dSX" secondAttribute="leading" id="uP1-7W-BdP"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="busLineColor" destination="s2i-s2-7SC" id="lXe-FC-1Nf"/>
+                                            <outlet property="busLineLbl" destination="RuJ-ka-dSX" id="afU-kc-QjC"/>
                                             <outlet property="distanceLbl" destination="tcc-Q6-Awm" id="L11-x9-dkg"/>
                                             <outlet property="durationLbl" destination="Hni-1D-ZdP" id="4IR-ho-oC1"/>
                                             <outlet property="instructionLbl" destination="Y6f-SO-4LE" id="KoH-Lv-rRz"/>
@@ -169,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8iQ-Ir-sqb" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1090" y="64"/>
+            <point key="canvasLocation" x="1088.8" y="63.418290854572717"/>
         </scene>
     </scenes>
 </document>
