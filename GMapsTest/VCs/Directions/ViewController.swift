@@ -16,6 +16,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     
     var destinationLat = 39.6080321
     var destinationLong = 2.6448371
+    
+    var startMarker : GMSMarker!
+    var endMarker : GMSMarker!
 
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -31,8 +34,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var navigationModeCollectionView: UICollectionView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +52,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let startPoint = CLLocationCoordinate2D(latitude: originLat, longitude: originLong)
         let endPoint = CLLocationCoordinate2D(latitude: destinationLat,longitude: destinationLong)
         let bounds = GMSCoordinateBounds(coordinate: startPoint, coordinate: endPoint)
-        let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 150)
-        
+        let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 100)
         mapView.animate(with: cameraUpdate)
-       
+        
         //Set up markers
         setMarkers()
         
@@ -63,21 +63,21 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         
         //MapView Delegate
         mapView.delegate = self
-        
     }
     
     func setMarkers() {
-        
         // Creates a start marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: originLat, longitude: originLong)
-        marker.map = mapView
+        let startMarker = GMSMarker()
+        startMarker.position = CLLocationCoordinate2D(latitude: originLat, longitude: originLong)
+        startMarker.map = mapView
+        self.startMarker = startMarker
         
         // Creates an end marker
         let endMarker = GMSMarker()
         endMarker.position = CLLocationCoordinate2D(latitude: destinationLat, longitude: destinationLong)
         endMarker.title = "Son Espases"
         endMarker.map = mapView
+        self.endMarker = endMarker
     }
     
     func setMapStyle() {
@@ -109,8 +109,10 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     self.steps = (route?.legs.first?.steps)!
                     //Store each step path polyline
                     self.prepareSteps(steps: self.steps)
+                    //Scroll to first item
+                    self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: UICollectionViewScrollPosition.left, animated: true)
                 } else {
-                    print("Error")
+                    print("No route available")
                 }
                
             } else {
@@ -121,6 +123,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func drawRoute(points : [String]) {
+        
+        //Clear previous routes
+        mapView.clear()
+        
+        //Draw route on map
         for point in points {
             let path = GMSPath.init(fromEncodedPath: point)
             let polyline = GMSPolyline.init(path: path)
@@ -128,17 +135,24 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             polyline.strokeColor = UIColor.red
             polyline.map = self.mapView
         }
+        
+        //Set start and end markers
         setMarkers()
+        
+        // Update camera to fit start and end pois
+        let startPoint = CLLocationCoordinate2D(latitude: originLat, longitude: originLong)
+        let endPoint = CLLocationCoordinate2D(latitude: destinationLat,longitude: destinationLong)
+        let bounds = GMSCoordinateBounds(coordinate: startPoint, coordinate: endPoint)
+        let cameraUpdate = GMSCameraUpdate.fit(bounds, withPadding: 100)
+        mapView.animate(with: cameraUpdate)
     }
     
     func prepareSteps(steps : [Step]) {
+        
+        self.stepPathPolylines.removeAll()
+        
         for step in steps {
-            //Recalculate route from that point in the map
-            let path = GMSMutablePath()
-            path.add(CLLocationCoordinate2D(latitude: step.startLocationLat,
-                                            longitude: step.startLocationLong))
-            path.add(CLLocationCoordinate2D(latitude: step.endLocationLat,
-                                            longitude: step.endLocationLong))
+            let path = GMSPath.init(fromEncodedPath: step.polylinePoints)
             let polyline = GMSPolyline.init(path: path)
             polyline.strokeWidth = 5
             polyline.strokeColor = UIColor.black.withAlphaComponent(0.5)
@@ -231,17 +245,20 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //Remove all steps lines from the map
-        for polyline in self.stepPathPolylines {
-            polyline.map = nil
-        }
-        
         //Add the first visible cell step line to the map
         if self.collectionView.indexPathsForVisibleItems.first != nil {
             let visibleCells = self.collectionView.indexPathsForVisibleItems
                 .sorted { $0.section < $1.section || $0.row < $1.row }
-            let polyline = self.stepPathPolylines[(visibleCells.first?.row)!]
-            polyline.map = self.mapView
+            
+            var stepPolylines = [String]()
+            for index in (visibleCells.first?.row)! ... self.stepPathPolylines.count-1 {
+                let step = self.steps[index]
+                stepPolylines.append(step.polylinePoints)
+            }
+            let startStep = self.steps[(visibleCells.first?.row)!]
+            self.originLat = startStep.startLocationLat
+            self.originLong = startStep.startLocationLong
+            drawRoute(points: stepPolylines)
         }
     }
     
@@ -253,7 +270,6 @@ extension ViewController : GMSMapViewDelegate {
         //User tapped at coordinate
         self.originLat = coordinate.latitude
         self.originLong = coordinate.longitude
-        mapView.clear()
         getDirections(navMode: selectedNavMode.rawValue)
     }
 }

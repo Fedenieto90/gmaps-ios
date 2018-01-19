@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JbO-s8-kl2" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="493"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEr-Dd-T2s" customClass="GradientView" customModule="GMapsTest" customModuleProvider="target">
@@ -161,13 +161,13 @@
                             <constraint firstItem="zJs-L4-S6R" firstAttribute="bottom" secondItem="jEr-Dd-T2s" secondAttribute="bottom" id="Kos-il-iJS"/>
                             <constraint firstItem="JbO-s8-kl2" firstAttribute="top" secondItem="zJs-L4-S6R" secondAttribute="top" id="NBm-mv-3R1"/>
                             <constraint firstAttribute="trailing" secondItem="jEr-Dd-T2s" secondAttribute="trailing" id="Spu-74-bnV"/>
+                            <constraint firstItem="jEr-Dd-T2s" firstAttribute="top" secondItem="JbO-s8-kl2" secondAttribute="bottom" constant="-100" id="TJq-BH-EYQ"/>
                             <constraint firstItem="JbO-s8-kl2" firstAttribute="trailing" secondItem="zJs-L4-S6R" secondAttribute="trailing" id="TTc-Xk-c4R"/>
                             <constraint firstItem="zJs-L4-S6R" firstAttribute="trailing" secondItem="sal-vD-TJA" secondAttribute="trailing" constant="10" id="VKf-HD-BsM"/>
                             <constraint firstItem="zJs-L4-S6R" firstAttribute="trailing" secondItem="5hA-hx-udI" secondAttribute="trailing" constant="10" id="XxC-WA-nlt"/>
                             <constraint firstItem="JbO-s8-kl2" firstAttribute="leading" secondItem="zJs-L4-S6R" secondAttribute="leading" id="c78-Hk-FaJ"/>
                             <constraint firstItem="zJs-L4-S6R" firstAttribute="bottom" secondItem="5hA-hx-udI" secondAttribute="bottom" id="eho-Q5-7pm"/>
                             <constraint firstItem="sal-vD-TJA" firstAttribute="leading" secondItem="zJs-L4-S6R" secondAttribute="leading" constant="10" id="fui-xD-2rQ"/>
-                            <constraint firstItem="JbO-s8-kl2" firstAttribute="bottom" secondItem="zJs-L4-S6R" secondAttribute="bottom" id="lvr-fm-Pi1"/>
                             <constraint firstItem="jEr-Dd-T2s" firstAttribute="top" secondItem="5hA-hx-udI" secondAttribute="top" constant="-10" id="wYf-QK-vuT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zJs-L4-S6R"/>

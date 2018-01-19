@@ -42,7 +42,7 @@ class Step: NSObject {
     var travelMode : String?
     var steps : [Step]?
     var transitDetail : TransitDetail?
-    var polylinePoints : String?
+    var polylinePoints : String
     
     
     init(data: JSON) {

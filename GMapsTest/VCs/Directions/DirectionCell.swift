@@ -18,4 +18,9 @@ class DirectionCell: UICollectionViewCell {
     
     let cellID = "directionCell"
     
+    override func awakeFromNib() {
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
+    }
+    
 }

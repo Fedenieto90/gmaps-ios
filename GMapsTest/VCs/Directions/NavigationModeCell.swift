@@ -11,4 +11,9 @@ import UIKit
 class NavigationModeCell: UICollectionViewCell {
     
     @IBOutlet weak var navigationModeLbl: UILabel!
+    
+    override func awakeFromNib() {
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
+    }
 }
