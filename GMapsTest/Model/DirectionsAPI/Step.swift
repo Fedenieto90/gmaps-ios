@@ -61,6 +61,8 @@ class Step: NSObject {
         self.startLocationLong = data[Keys.startLocation][Keys.longitude].doubleValue
         self.endLocationLat = data[Keys.endLocation][Keys.latitude].doubleValue
         self.endLocationLong = data[Keys.endLocation][Keys.longitude].doubleValue
+        
+        //Travel Mode
         let travelMode = data[Keys.travelMode].stringValue
         if travelMode == TravelMode.bicycling.rawValue {
             self.travelMode = .bicycling

@@ -45,6 +45,8 @@ class LineVehicle: NSObject {
     
     init(data: JSON) {
         self.name = data[Keys.name].stringValue
+        
+        //Vehicle Type
         let vehicleType = data[Keys.type].stringValue
         if vehicleType == VehicleType.rail.rawValue {
             self.type = .rail
