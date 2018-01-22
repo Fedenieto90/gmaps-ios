@@ -27,6 +27,12 @@ private struct Keys {
     static let points = "points"
 }
 
+public enum TravelMode : String {
+    case driving = "DRIVING"
+    case walking = "WALKING"
+    case bicycling = "BICYCLING"
+}
+
 class Step: NSObject {
     
     var instruction : String
@@ -39,7 +45,7 @@ class Step: NSObject {
     var endLocationLat : Double
     var endLocationLong : Double
     var maneuver : String
-    var travelMode : String?
+    var travelMode : TravelMode?
     var steps : [Step]?
     var transitDetail : TransitDetail?
     var polylinePoints : String
@@ -55,7 +61,14 @@ class Step: NSObject {
         self.startLocationLong = data[Keys.startLocation][Keys.longitude].doubleValue
         self.endLocationLat = data[Keys.endLocation][Keys.latitude].doubleValue
         self.endLocationLong = data[Keys.endLocation][Keys.longitude].doubleValue
-        self.travelMode = data[Keys.travelMode].stringValue
+        let travelMode = data[Keys.travelMode].stringValue
+        if travelMode == TravelMode.bicycling.rawValue {
+            self.travelMode = .bicycling
+        } else if travelMode == TravelMode.driving.rawValue {
+            self.travelMode = .driving
+        } else if travelMode == TravelMode.walking.rawValue {
+            self.travelMode = .walking
+        }
         self.maneuver = data[Keys.maneuver].stringValue
         self.polylinePoints = data[Keys.polyline][Keys.points].stringValue
         
