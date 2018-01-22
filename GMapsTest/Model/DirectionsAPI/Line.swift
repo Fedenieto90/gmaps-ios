@@ -9,6 +9,16 @@
 import UIKit
 import SwiftyJSON
 
+private struct Keys {
+    static let name = "name"
+    static let shortName = "short_name"
+    static let url = "url"
+    static let icon = "icon"
+    static let textColor = "text_color"
+    static let color = "color"
+    static let vehicle = "vehicle"
+}
+
 class Line: NSObject {
     
     var name : String
@@ -20,12 +30,12 @@ class Line: NSObject {
     var lineVehicle : LineVehicle
 
     init(data: JSON) {
-        self.name = data["name"].stringValue
-        self.number = data["short_name"].stringValue
-        self.url = data["url"].stringValue
-        self.icon = data["icon"].stringValue
-        self.textColor = UIColor.hexStringToUIColor(hex: data["text_color"].stringValue)
-        self.color = UIColor.hexStringToUIColor(hex: data["color"].stringValue)
-        self.lineVehicle = LineVehicle(data: data["vehicle"] as JSON)
+        self.name = data[Keys.name].stringValue
+        self.number = data[Keys.shortName].stringValue
+        self.url = data[Keys.url].stringValue
+        self.icon = data[Keys.icon].stringValue
+        self.textColor = UIColor.hexStringToUIColor(hex: data[Keys.textColor].stringValue)
+        self.color = UIColor.hexStringToUIColor(hex: data[Keys.color].stringValue)
+        self.lineVehicle = LineVehicle(data: data[Keys.vehicle] as JSON)
     }
 }

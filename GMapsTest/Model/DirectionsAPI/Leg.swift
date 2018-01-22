@@ -9,6 +9,23 @@
 import UIKit
 import SwiftyJSON
 
+private struct Keys {
+    static let startLocation = "start_location"
+    static let endLocation = "end_location"
+    static let lat = "lat"
+    static let long = "lng"
+    static let startAddress = "start_address"
+    static let endAddress = "end_address"
+    static let distance = "distance"
+    static let duration = "duration"
+    static let arrivalTime = "arrival_time"
+    static let departureTime = "departure_time"
+    static let text = "text"
+    static let value = "value"
+    static let timeZone = "time_zone"
+    static let steps = "steps"
+}
+
 class Leg: NSObject {
     
     var startAdress : String
@@ -37,26 +54,26 @@ class Leg: NSObject {
     var steps : [Step]
     
     init(data : JSON) {
-        self.startLocationLat = data["start_location"]["lat"].doubleValue
-        self.startLocationLong = data["start_location"]["lng"].doubleValue
-        self.endLocationLat = data["end_location"]["lat"].doubleValue
-        self.endLocationLong = data["end_location"]["lng"].doubleValue
-        self.startAdress = data["start_address"].stringValue
-        self.endAddress = data["end_address"].stringValue
-        self.distanceText = data["distance"]["text"].stringValue
-        self.distanceValue = data["distance"]["value"].doubleValue
-        self.durationText = data["duration"]["text"].stringValue
-        self.durationValue = data["duration"]["value"].doubleValue
-        self.arrivalTimeText = data["arrival_time"]["text"].stringValue
-        self.arrivalTimeValue = data["arrival_time"]["value"].doubleValue
-        self.arrivalTimeTimezone = data["arrival_time"]["time_zone"].doubleValue
-        self.departureTimeText = data["departure_time"]["text"].stringValue
-        self.departureTimeValue = data["departure_time"]["value"].doubleValue
-        self.departureTimeTimezone = data["departure_time"]["time_zone"].doubleValue
+        self.startLocationLat = data[Keys.startLocation][Keys.lat].doubleValue
+        self.startLocationLong = data[Keys.startLocation][Keys.long].doubleValue
+        self.endLocationLat = data[Keys.endLocation][Keys.lat].doubleValue
+        self.endLocationLong = data[Keys.endLocation][Keys.long].doubleValue
+        self.startAdress = data[Keys.startAddress].stringValue
+        self.endAddress = data[Keys.endAddress].stringValue
+        self.distanceText = data[Keys.distance][Keys.text].stringValue
+        self.distanceValue = data[Keys.distance][Keys.value].doubleValue
+        self.durationText = data[Keys.duration][Keys.text].stringValue
+        self.durationValue = data[Keys.duration][Keys.value].doubleValue
+        self.arrivalTimeText = data[Keys.arrivalTime][Keys.text].stringValue
+        self.arrivalTimeValue = data[Keys.arrivalTime][Keys.value].doubleValue
+        self.arrivalTimeTimezone = data[Keys.arrivalTime][Keys.timeZone].doubleValue
+        self.departureTimeText = data[Keys.departureTime][Keys.text].stringValue
+        self.departureTimeValue = data[Keys.departureTime][Keys.value].doubleValue
+        self.departureTimeTimezone = data[Keys.departureTime][Keys.timeZone].doubleValue
         
         //Steps
         var stepItems = [Step]()
-        for step in data["steps"].arrayValue {
+        for step in data[Keys.steps].arrayValue {
             let stepItem = Step(data: step)
             stepItems.append(stepItem)
         }

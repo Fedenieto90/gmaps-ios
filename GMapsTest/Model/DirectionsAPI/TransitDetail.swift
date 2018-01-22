@@ -9,6 +9,23 @@
 import UIKit
 import SwiftyJSON
 
+private struct Keys {
+    static let arrivalStop = "arrival_stop"
+    static let name = "name"
+    static let location = "location"
+    static let latitude = "lat"
+    static let longitude = "lng"
+    static let arrivalTime = "arrival_time"
+    static let departureStop = "departure_stop"
+    static let departureTime = "departure_time"
+    static let text = "text"
+    static let value = "value"
+    static let timeZone = "time_zone"
+    static let headSign = "headsign"
+    static let numberOfStops = "num_stops"
+    static let line = "line"
+}
+
 class TransitDetail: NSObject {
     
     var arrivalStopName : String
@@ -34,26 +51,26 @@ class TransitDetail: NSObject {
     
     init(data: JSON) {
         
-        self.arrivalStopName = data["arrival_stop"]["name"].stringValue
-        self.arrivalStopLat = data["arrival_stop"]["location"]["lat"].doubleValue
-        self.arrivalStopLong = data["arrival_stop"]["location"]["lng"].doubleValue
+        self.arrivalStopName = data[Keys.arrivalStop][Keys.name].stringValue
+        self.arrivalStopLat = data[Keys.arrivalStop][Keys.location][Keys.latitude].doubleValue
+        self.arrivalStopLong = data[Keys.arrivalStop][Keys.location][Keys.longitude].doubleValue
         
-        self.arrivalTimeText = data["arrival_time"]["text"].stringValue
-        self.arrivalTimeValue = data["arrival_time"]["value"].doubleValue
-        self.arrivalTimeTimezone = data["arrival_time"]["time_zone"].stringValue
+        self.arrivalTimeText = data[Keys.arrivalTime][Keys.text].stringValue
+        self.arrivalTimeValue = data[Keys.arrivalTime][Keys.value].doubleValue
+        self.arrivalTimeTimezone = data[Keys.arrivalTime][Keys.timeZone].stringValue
         
-        self.departureStopName = data["departure_stop"]["name"].stringValue
-        self.departureStopLat = data["departure_stop"]["location"]["lat"].doubleValue
-        self.departureStopLong = data["departure_stop"]["location"]["lng"].doubleValue
+        self.departureStopName = data[Keys.departureStop][Keys.name].stringValue
+        self.departureStopLat = data[Keys.departureStop][Keys.location][Keys.latitude].doubleValue
+        self.departureStopLong = data[Keys.departureStop][Keys.location][Keys.longitude].doubleValue
         
-        self.departureTimeText = data["departure_time"]["text"].stringValue
-        self.departureTimeValue = data["departure_time"]["value"].doubleValue
-        self.departureTimeTimezone = data["departure_time"]["time_zone"].stringValue
+        self.departureTimeText = data[Keys.departureTime][Keys.text].stringValue
+        self.departureTimeValue = data[Keys.departureTime][Keys.value].doubleValue
+        self.departureTimeTimezone = data[Keys.departureTime][Keys.timeZone].stringValue
         
-        self.headsSign = data["headsign"].stringValue
-        self.numberOfStops = data["num_stops"].intValue
+        self.headsSign = data[Keys.headSign].stringValue
+        self.numberOfStops = data[Keys.numberOfStops].intValue
 
-        self.line = Line(data: data["line"] as JSON)
+        self.line = Line(data: data[Keys.line] as JSON)
     }
 
 }
