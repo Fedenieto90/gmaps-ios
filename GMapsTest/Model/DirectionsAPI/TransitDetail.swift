@@ -21,7 +21,8 @@ private struct Keys {
     static let text = "text"
     static let value = "value"
     static let timeZone = "time_zone"
-    static let headSign = "headsign"
+    static let headsign = "headsign"
+    static let headway = "headway"
     static let numberOfStops = "num_stops"
     static let line = "line"
 }
@@ -44,7 +45,8 @@ class TransitDetail: NSObject {
     var departureTimeValue : Double
     var departureTimeTimezone : String
     
-    var headsSign : String
+    var headsign : String
+    var headway : String
     var numberOfStops : Int
     
     var line : Line
@@ -67,7 +69,8 @@ class TransitDetail: NSObject {
         self.departureTimeValue = data[Keys.departureTime][Keys.value].doubleValue
         self.departureTimeTimezone = data[Keys.departureTime][Keys.timeZone].stringValue
         
-        self.headsSign = data[Keys.headSign].stringValue
+        self.headsign = data[Keys.headsign].stringValue
+        self.headway = data[Keys.headway].stringValue
         self.numberOfStops = data[Keys.numberOfStops].intValue
 
         self.line = Line(data: data[Keys.line] as JSON)

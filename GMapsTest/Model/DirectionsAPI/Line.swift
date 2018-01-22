@@ -17,6 +17,7 @@ private struct Keys {
     static let textColor = "text_color"
     static let color = "color"
     static let vehicle = "vehicle"
+    static let agencies = "agencies"
 }
 
 class Line: NSObject {
@@ -28,8 +29,11 @@ class Line: NSObject {
     var icon : String
     var textColor : UIColor
     var lineVehicle : LineVehicle
+    
+    var agencies : [TransitAgency]
 
     init(data: JSON) {
+        
         self.name = data[Keys.name].stringValue
         self.number = data[Keys.shortName].stringValue
         self.url = data[Keys.url].stringValue
@@ -37,5 +41,11 @@ class Line: NSObject {
         self.textColor = UIColor.hexStringToUIColor(hex: data[Keys.textColor].stringValue)
         self.color = UIColor.hexStringToUIColor(hex: data[Keys.color].stringValue)
         self.lineVehicle = LineVehicle(data: data[Keys.vehicle] as JSON)
+        var agencies = [TransitAgency]()
+        for agency in data[Keys.agencies].arrayValue {
+            let transitAgency = TransitAgency(data: agency as JSON)
+            agencies.append(transitAgency)
+        }
+        self.agencies = agencies
     }
 }

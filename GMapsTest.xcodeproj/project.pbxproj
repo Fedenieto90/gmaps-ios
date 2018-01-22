@@ -22,6 +22,7 @@
 		8BB76D84200510660000E3FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB76D82200510660000E3FF /* LaunchScreen.storyboard */; };
 		8BB76D8F200510670000E3FF /* GMapsTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB76D8E200510670000E3FF /* GMapsTestTests.swift */; };
 		8BB76D9A200510670000E3FF /* GMapsTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB76D99200510670000E3FF /* GMapsTestUITests.swift */; };
+		8BC739F6201636E80051DFAA /* TransitAgency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC739F5201636E80051DFAA /* TransitAgency.swift */; };
 		8BE6802B200CF6AE00CAA057 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE6802A200CF6AE00CAA057 /* DetailVC.swift */; };
 		8BE6802D200D2C6D00CAA057 /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE6802C200D2C6D00CAA057 /* BottomSheetVC.swift */; };
 		8BE6802F200D34FD00CAA057 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE6802E200D34FD00CAA057 /* Province.swift */; };
@@ -83,6 +84,7 @@
 		8BB76D95200510670000E3FF /* GMapsTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GMapsTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB76D99200510670000E3FF /* GMapsTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMapsTestUITests.swift; sourceTree = "<group>"; };
 		8BB76D9B200510670000E3FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BC739F5201636E80051DFAA /* TransitAgency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitAgency.swift; sourceTree = "<group>"; };
 		8BE6802A200CF6AE00CAA057 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		8BE6802C200D2C6D00CAA057 /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		8BE6802E200D34FD00CAA057 /* Province.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Province.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				8BF88010200FDC50008132D8 /* TransitDetail.swift */,
 				8B096379200FE3150063C95D /* Line.swift */,
 				8B09638020111C8B0063C95D /* LineVehicle.swift */,
+				8BC739F5201636E80051DFAA /* TransitAgency.swift */,
 			);
 			path = DirectionsAPI;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				8BF88011200FDC50008132D8 /* TransitDetail.swift in Sources */,
 				8BF8800D200FCDE1008132D8 /* Route.swift in Sources */,
 				8B09638120111C8B0063C95D /* LineVehicle.swift in Sources */,
+				8BC739F6201636E80051DFAA /* TransitAgency.swift in Sources */,
 				8BB76D7A200510660000E3FF /* AppDelegate.swift in Sources */,
 				8BFDBC89200693AE004F7230 /* GradientView.swift in Sources */,
 				8BE6802B200CF6AE00CAA057 /* DetailVC.swift in Sources */,
