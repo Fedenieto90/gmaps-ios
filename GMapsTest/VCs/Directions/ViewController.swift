@@ -203,6 +203,13 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
         if collectionView == navigationModeCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "navigationModeCell", for: indexPath) as! NavigationModeCell
             cell.navigationModeLbl.text = navigationModes[indexPath.row].rawValue.capitalized
+            //Add cell shadow style
+            cell.layer.masksToBounds = false
+            cell.layer.borderColor = UIColor.white.cgColor
+            cell.layer.shadowOpacity = 0.3
+            cell.layer.shadowRadius = 3.0
+            cell.layer.shadowOffset = CGSize(width: 2, height: 2)
+            cell.layer.shadowPath = UIBezierPath(rect: cell.bounds).cgPath
             return cell
         } else {
             //Step cell
@@ -213,6 +220,15 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
                 cell.distanceLbl.text = steps[indexPath.row].distanceText
                 cell.busLineLbl.text = steps[indexPath.row].transitDetail?.line.number
                 cell.busLineColor.backgroundColor = steps[indexPath.row].transitDetail?.line.color
+                
+                //Add cell shadow style
+                cell.layer.masksToBounds = false
+                cell.layer.borderColor = UIColor.white.cgColor
+                cell.layer.shadowOpacity = 0.3
+                cell.layer.shadowRadius = 3.0
+                cell.layer.shadowOffset = CGSize(width: 2, height: 2)
+                cell.layer.shadowPath = UIBezierPath(rect: cell.bounds).cgPath
+                
                 do {
                     let attrStr = try NSAttributedString(
                         data: htmlDirection.data(using: String.Encoding.unicode, allowLossyConversion: true)!,
