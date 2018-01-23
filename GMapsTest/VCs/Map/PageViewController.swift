@@ -10,12 +10,7 @@ import UIKit
 
 class PageViewController: UIPageViewController
 {
-    fileprivate lazy var pages: [UIViewController] = {
-        return [
-            self.getViewController(withIdentifier: "Floor1"),
-            self.getViewController(withIdentifier: "Floor2")
-        ]
-    }()
+    var pages = [UIViewController]()
     
     fileprivate func getViewController(withIdentifier identifier: String) -> UIViewController
     {
@@ -27,6 +22,18 @@ class PageViewController: UIPageViewController
         super.viewDidLoad()
         self.dataSource = self
         self.delegate   = self
+        
+        var provincesBottomSheetVCs = [UINavigationController]()
+        for province in ProvincesHelper.provinces() {
+            let vc = getViewController(withIdentifier: "BottomSheetNav") as! UINavigationController
+            vc.navigationBar.isTranslucent = false
+            vc.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            vc.navigationBar.shadowImage = UIImage()
+            (vc.childViewControllers.first as! BottomSheetVC).province = province
+            (vc.childViewControllers.first as! BottomSheetVC).delegate = self
+            provincesBottomSheetVCs.append(vc)
+        }
+        pages = provincesBottomSheetVCs
         
         if let firstVC = pages.first
         {
@@ -43,7 +50,7 @@ extension PageViewController: UIPageViewControllerDataSource
         
         let previousIndex = viewControllerIndex - 1
         
-        guard previousIndex >= 0          else { return pages.last }
+        guard previousIndex >= 0          else { return nil }
         
         guard pages.count > previousIndex else { return nil        }
         
@@ -56,15 +63,40 @@ extension PageViewController: UIPageViewControllerDataSource
         
         let nextIndex = viewControllerIndex + 1
         
-        guard nextIndex < pages.count else { return pages.first }
+        guard nextIndex < pages.count else { return nil }
         
         guard pages.count > nextIndex else { return nil         }
         
         return pages[nextIndex]
     }
     
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return ProvincesHelper.provinces().count
+    }
+
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        return 0
+    }
+    
 }
 
 extension PageViewController: UIPageViewControllerDelegate {
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        let province = (pageViewController.viewControllers?.first?.childViewControllers.first as! BottomSheetVC).province!
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PageChanged"), object: nil, userInfo: ["province" : province])
+    }
+    
+}
+
+extension PageViewController : BottomSheetVCDelegate {
+    
+    func didChangePage(province : Province) {
+        let index = ProvincesHelper.provinces().index(where: {$0.id == province.id})!
+        let viewController = pages[index]
+        self.setViewControllers([viewController], direction: .forward, animated: false, completion: nil)
+    }
+    
+    
     
 }

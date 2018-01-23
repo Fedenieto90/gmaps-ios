@@ -1,5 +1,5 @@
 //
-//  DetailVC.swift
+//  CustomPulleyVC.swift
 //  GMapsTest
 //
 //  Created by Federico Nieto on 1/23/18.
@@ -7,20 +7,18 @@
 //
 
 import UIKit
+import Pulley
 
-class DetailVC: UIViewController {
+class CustomPulleyVC: PulleyViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.drawerBackgroundVisualEffectView?.backgroundColor = UIColor.white
+        self.drawerBackgroundVisualEffectView?.effect = nil
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

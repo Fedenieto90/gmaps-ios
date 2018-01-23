@@ -28,15 +28,24 @@ class MapVC: UIViewController, PulleyPrimaryContentControllerDelegate {
         configureTouchHandlers()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pageChanged), name: NSNotification.Name(rawValue: "PageChanged"), object: nil)
+    }
+    
+    @objc func pageChanged(notification : Notification) {
+        let province = notification.userInfo!["province"] as! Province
+        //If there is a province selected and we tap on another, we must deselect the already selected one
+        if self.selectedProvince != nil &&
+            self.provinceSelected(tag: province.id)?.id != self.selectedProvince?.id {
+            self.deselect(province: self.selectedProvince!)
+        }
+        self.selectProvince(nodeTag: province.id)
+        self.selectedProvince = province
+    }
+    
     func loadProvinces() {
-        let buenosAires = Province(name: "Buenos Aires",
-                                   id: "AR-B",
-                                   cities: ["Buenos Aires", "Mar del Plata"])
-        let cordoba = Province(name: "Córdoba",
-                               id: "AR-X",
-                               cities: ["Río Cuarto", "Rio Tercero"])
-        self.provinces.append(buenosAires)
-        self.provinces.append(cordoba)
+        self.provinces = ProvincesHelper.provinces()
     }
         
     func selectProvince(nodeTag : String) {

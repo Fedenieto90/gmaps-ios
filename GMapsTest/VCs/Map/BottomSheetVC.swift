@@ -9,25 +9,39 @@
 import UIKit
 import Pulley
 
-class BottomSheetVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol BottomSheetVCDelegate {
+    func didChangePage(province : Province)
+}
 
+class BottomSheetVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var provinceName: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var cities = [String]() {
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
+    var province : Province!
+    var delegate : BottomSheetVCDelegate?
+    var cities = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.provinceName.text = province.name
+        self.cities = province.cities
+        self.tableView.reloadData()
+        
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(self.provinceTapped), name: NSNotification.Name(rawValue: "ProvinceTapped"), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     @objc func provinceTapped(notification : Notification) {
         let province = notification.userInfo!["province"] as! Province
-        self.cities = province.cities
+        //self.cities = province.cities
+        self.delegate?.didChangePage(province : province)
     }
     
     //MARK : - UITableViewDelegate

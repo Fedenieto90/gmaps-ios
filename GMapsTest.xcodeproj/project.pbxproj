@@ -23,7 +23,9 @@
 		8BB76D8F200510670000E3FF /* GMapsTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB76D8E200510670000E3FF /* GMapsTestTests.swift */; };
 		8BB76D9A200510670000E3FF /* GMapsTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB76D99200510670000E3FF /* GMapsTestUITests.swift */; };
 		8BC739F6201636E80051DFAA /* TransitAgency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC739F5201636E80051DFAA /* TransitAgency.swift */; };
-		8BE6802B200CF6AE00CAA057 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE6802A200CF6AE00CAA057 /* DetailVC.swift */; };
+		8BC739F8201658460051DFAA /* ProvincesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC739F7201658460051DFAA /* ProvincesHelper.swift */; };
+		8BC739FA20176F890051DFAA /* CustomPulleyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC739F920176F890051DFAA /* CustomPulleyVC.swift */; };
+		8BC739FC201774730051DFAA /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC739FB201774730051DFAA /* DetailVC.swift */; };
 		8BE6802D200D2C6D00CAA057 /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE6802C200D2C6D00CAA057 /* BottomSheetVC.swift */; };
 		8BE6802F200D34FD00CAA057 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE6802E200D34FD00CAA057 /* Province.swift */; };
 		8BE68034200E548500CAA057 /* DirectionsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE68033200E548500CAA057 /* DirectionsCollectionViewFlowLayout.swift */; };
@@ -85,7 +87,9 @@
 		8BB76D99200510670000E3FF /* GMapsTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMapsTestUITests.swift; sourceTree = "<group>"; };
 		8BB76D9B200510670000E3FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BC739F5201636E80051DFAA /* TransitAgency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitAgency.swift; sourceTree = "<group>"; };
-		8BE6802A200CF6AE00CAA057 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		8BC739F7201658460051DFAA /* ProvincesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvincesHelper.swift; sourceTree = "<group>"; };
+		8BC739F920176F890051DFAA /* CustomPulleyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPulleyVC.swift; sourceTree = "<group>"; };
+		8BC739FB201774730051DFAA /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		8BE6802C200D2C6D00CAA057 /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		8BE6802E200D34FD00CAA057 /* Province.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Province.swift; sourceTree = "<group>"; };
 		8BE68033200E548500CAA057 /* DirectionsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 				8BFDBC8620068417004F7230 /* gMapsSilverTheme.json */,
 				8BFDBC88200693AE004F7230 /* GradientView.swift */,
 				8B09637B2010E7A50063C95D /* UIColor.swift */,
+				8BC739F7201658460051DFAA /* ProvincesHelper.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -236,9 +241,10 @@
 			children = (
 				8B99A381200927000088B849 /* argentinaLow.svg */,
 				8B99A37D20090E040088B849 /* MapVC.swift */,
-				8BE6802A200CF6AE00CAA057 /* DetailVC.swift */,
 				8BE6802C200D2C6D00CAA057 /* BottomSheetVC.swift */,
 				8BE68036200F9F8700CAA057 /* PageViewController.swift */,
+				8BC739F920176F890051DFAA /* CustomPulleyVC.swift */,
+				8BC739FB201774730051DFAA /* DetailVC.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -615,17 +621,19 @@
 				8BE68034200E548500CAA057 /* DirectionsCollectionViewFlowLayout.swift in Sources */,
 				8BF1E2BA2006593B002B5A3F /* NavigationModeCell.swift in Sources */,
 				8B09637A200FE3150063C95D /* Line.swift in Sources */,
+				8BC739F8201658460051DFAA /* ProvincesHelper.swift in Sources */,
 				8BFA26CE200516AE00340E5B /* DirectionsAPI.swift in Sources */,
 				8BF8800F200FD49E008132D8 /* Leg.swift in Sources */,
+				8BC739FA20176F890051DFAA /* CustomPulleyVC.swift in Sources */,
 				8BB76D7C200510660000E3FF /* ViewController.swift in Sources */,
 				8BE6802F200D34FD00CAA057 /* Province.swift in Sources */,
 				8BF88011200FDC50008132D8 /* TransitDetail.swift in Sources */,
 				8BF8800D200FCDE1008132D8 /* Route.swift in Sources */,
 				8B09638120111C8B0063C95D /* LineVehicle.swift in Sources */,
 				8BC739F6201636E80051DFAA /* TransitAgency.swift in Sources */,
+				8BC739FC201774730051DFAA /* DetailVC.swift in Sources */,
 				8BB76D7A200510660000E3FF /* AppDelegate.swift in Sources */,
 				8BFDBC89200693AE004F7230 /* GradientView.swift in Sources */,
-				8BE6802B200CF6AE00CAA057 /* DetailVC.swift in Sources */,
 				8BFA26D02005264B00340E5B /* DirectionCell.swift in Sources */,
 				8B09637C2010E7A50063C95D /* UIColor.swift in Sources */,
 				8BE6802D200D2C6D00CAA057 /* BottomSheetVC.swift in Sources */,
