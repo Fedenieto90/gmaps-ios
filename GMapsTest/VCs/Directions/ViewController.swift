@@ -41,6 +41,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         //Configure map
         setMap()
         
+        self.collectionView.contentInset = UIEdgeInsetsMake(0, 20, 0, 0)
         self.collectionView.reloadData()
         self.collectionView.isHidden = true
         self.navigationModeCollectionView.reloadData()
@@ -173,44 +174,61 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
 }
 
-extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.collectionView {
+            return CGSize(width: self.view.bounds.size.width * 0.5, height: 140);
+        } else {
+            return CGSize(width: 150, height: 150);
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (collectionView == navigationModeCollectionView) {
             return navigationModes.count
         } else {
-            return steps.count
+            return steps.count + 1
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        //Navigation mode cell
         if collectionView == navigationModeCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "navigationModeCell", for: indexPath) as! NavigationModeCell
             cell.navigationModeLbl.text = navigationModes[indexPath.row].rawValue.capitalized
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "directionCell", for: indexPath) as! DirectionCell
-            let htmlDirection = steps[indexPath.row].instruction
-            cell.durationLbl.text = steps[indexPath.row].durationText
-            cell.distanceLbl.text = steps[indexPath.row].distanceText
-            cell.busLineLbl.text = steps[indexPath.row].transitDetail?.line.number
-            cell.busLineColor.backgroundColor = steps[indexPath.row].transitDetail?.line.color
-            do {
-                let attrStr = try NSAttributedString(
-                    data: htmlDirection.data(using: String.Encoding.unicode, allowLossyConversion: true)!,
-                    options: [ .documentType : NSAttributedString.DocumentType.html],
-                    documentAttributes: nil)
-                cell.instructionLbl.attributedText = attrStr
+            //Step cell
+            if indexPath.row < steps.count {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "directionCell", for: indexPath) as! DirectionCell
+                let htmlDirection = steps[indexPath.row].instruction
+                cell.durationLbl.text = steps[indexPath.row].durationText
+                cell.distanceLbl.text = steps[indexPath.row].distanceText
+                cell.busLineLbl.text = steps[indexPath.row].transitDetail?.line.number
+                cell.busLineColor.backgroundColor = steps[indexPath.row].transitDetail?.line.color
+                do {
+                    let attrStr = try NSAttributedString(
+                        data: htmlDirection.data(using: String.Encoding.unicode, allowLossyConversion: true)!,
+                        options: [ .documentType : NSAttributedString.DocumentType.html],
+                        documentAttributes: nil)
+                    cell.instructionLbl.attributedText = attrStr
+                    return cell
+                } catch let error {
+                    print(error)
+                }
                 return cell
-            } catch let error {
-                print(error)
+            //Add extra cell
+            } else {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: "extraCell", for: indexPath)
             }
-            return cell
+           
         }
        
     }
@@ -225,6 +243,8 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
             
         }
     }
+    
+ 
     
     func updateCellsLayout()  {
         let centerX = collectionView.contentOffset.x + (collectionView.frame.size.width)/4
@@ -251,6 +271,7 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
                 .sorted { $0.section < $1.section || $0.row < $1.row }
             
             var stepPolylines = [String]()
+            
             for index in (visibleCells.first?.row)! ... self.stepPathPolylines.count-1 {
                 let step = self.steps[index]
                 stepPolylines.append(step.polylinePoints)

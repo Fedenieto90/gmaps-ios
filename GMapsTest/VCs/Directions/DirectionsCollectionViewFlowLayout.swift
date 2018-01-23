@@ -49,7 +49,7 @@ class DirectionsCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     return mostRecentOffset
                 }
                 
-                mostRecentOffset = CGPoint(x: floor(candidateAttributes!.center.x - halfWidth),
+                mostRecentOffset = CGPoint(x: floor(candidateAttributes!.center.x - halfWidth - cv.contentInset.left - 15),
                                            y: proposedContentOffset.y)
                 return mostRecentOffset
                 
