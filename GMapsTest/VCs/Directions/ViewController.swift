@@ -265,21 +265,24 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        //Add the first visible cell step line to the map
-        if self.collectionView.indexPathsForVisibleItems.first != nil {
-            let visibleCells = self.collectionView.indexPathsForVisibleItems
-                .sorted { $0.section < $1.section || $0.row < $1.row }
-            
-            var stepPolylines = [String]()
-            
-            for index in (visibleCells.first?.row)! ... self.stepPathPolylines.count-1 {
-                let step = self.steps[index]
-                stepPolylines.append(step.polylinePoints)
+        
+        if scrollView == self.collectionView {
+            //Add the first visible cell step line to the map
+            if self.collectionView.indexPathsForVisibleItems.first != nil {
+                let visibleCells = self.collectionView.indexPathsForVisibleItems
+                    .sorted { $0.section < $1.section || $0.row < $1.row }
+                
+                var stepPolylines = [String]()
+                
+                for index in (visibleCells.first?.row)! ... self.stepPathPolylines.count-1 {
+                    let step = self.steps[index]
+                    stepPolylines.append(step.polylinePoints)
+                }
+                let startStep = self.steps[(visibleCells.first?.row)!]
+                self.originLat = startStep.startLocationLat
+                self.originLong = startStep.startLocationLong
+                drawRoute(points: stepPolylines)
             }
-            let startStep = self.steps[(visibleCells.first?.row)!]
-            self.originLat = startStep.startLocationLat
-            self.originLong = startStep.startLocationLong
-            drawRoute(points: stepPolylines)
         }
     }
     
