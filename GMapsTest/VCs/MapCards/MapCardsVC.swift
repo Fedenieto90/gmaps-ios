@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Macaw
 
 class MapCardsVC: UIViewController {
     
@@ -17,6 +18,9 @@ class MapCardsVC: UIViewController {
     var originalPosition: CGPoint!
     var currentPositionTouched: CGPoint!
     var halfScreen : CGFloat!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var svgView: SVGView!
     
     var provinces = [Province]()
     
@@ -65,13 +69,34 @@ class MapCardsVC: UIViewController {
             }
         }
     }
+    
+    //MARK : - Select Provinces
+    
+    func configureTouchHandlers() {
+        
+        for province in self.provinces {
+            svgView.node.nodeBy(tag: province.id)?.onTouchPressed({ (touch) in
+                //Print selected province tag
+                print(province.id)
+                //Select province
+                self.selectProvince(nodeTag: province.id)
+            })
+        }
+    }
+    
+    func selectProvince(nodeTag : String) {
+        let provinceShape = self.svgView.node.nodeBy(tag: nodeTag) as! Shape
+        provinceShape.fill = Color.red
+    }
+    
 }
 
 extension MapCardsVC : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mapCardCell", for: indexPath) as! MapCardCell
-        //Instantiate
+        
+        //Instantiate View Controller for Card
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "cardInfoVC") as! CardVC
         let nav = UINavigationController(rootViewController: vc)
         vc.province = provinces[indexPath.row]
@@ -96,5 +121,11 @@ extension MapCardsVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(0, 20, 0, 20)
     }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let province = provinces[(self.collectionView.indexPathsForVisibleItems.first?.row)!]
+        self.selectProvince(nodeTag: province.id)
+    }
+    
     
 }

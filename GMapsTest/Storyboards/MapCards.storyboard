@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,13 +18,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ylu-mC-liD" customClass="SVGView" customModule="Macaw">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDm-7Z-Fqd">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="fileName" value="argentinaLow"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
+                                <subviews>
+                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Ylu-mC-liD" customClass="SVGView" customModule="Macaw">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Ylu-mC-liD" secondAttribute="height" multiplier="125:201" id="bDT-R1-vcT"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="fileName" value="argentinaLow"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Ylu-mC-liD" firstAttribute="top" secondItem="gDm-7Z-Fqd" secondAttribute="top" id="7lW-iZ-QDC"/>
+                                    <constraint firstItem="Ylu-mC-liD" firstAttribute="leading" secondItem="gDm-7Z-Fqd" secondAttribute="leading" id="LTF-Vo-z9x"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ylu-mC-liD" secondAttribute="trailing" id="Old-4C-n8t"/>
+                                    <constraint firstItem="Ylu-mC-liD" firstAttribute="centerX" secondItem="gDm-7Z-Fqd" secondAttribute="centerX" id="Qqu-Qk-TTD"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ylu-mC-liD" secondAttribute="bottom" id="u2B-Qd-cpb"/>
+                                </constraints>
+                            </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QOb-lA-QsE" userLabel="CardsCollectionView">
                                 <rect key="frame" x="0.0" y="467" width="375" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -100,16 +116,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3u6-AL-c1c" firstAttribute="bottom" secondItem="Ylu-mC-liD" secondAttribute="bottom" id="0rj-aE-SI2"/>
                             <constraint firstItem="QOb-lA-QsE" firstAttribute="leading" secondItem="3u6-AL-c1c" secondAttribute="leading" id="5aG-Fo-j2a"/>
-                            <constraint firstItem="QOb-lA-QsE" firstAttribute="bottom" secondItem="Ylu-mC-liD" secondAttribute="bottom" constant="400" id="CHo-Rq-fZA"/>
-                            <constraint firstItem="Ylu-mC-liD" firstAttribute="leading" secondItem="3u6-AL-c1c" secondAttribute="leading" id="Ibq-Pi-Dcx"/>
-                            <constraint firstItem="3u6-AL-c1c" firstAttribute="trailing" secondItem="Ylu-mC-liD" secondAttribute="trailing" id="JFv-TN-Xch"/>
+                            <constraint firstItem="gDm-7Z-Fqd" firstAttribute="bottom" secondItem="3u6-AL-c1c" secondAttribute="bottom" id="N1q-DV-x8V"/>
+                            <constraint firstItem="gDm-7Z-Fqd" firstAttribute="trailing" secondItem="3u6-AL-c1c" secondAttribute="trailing" id="SRX-w3-7GF"/>
+                            <constraint firstItem="gDm-7Z-Fqd" firstAttribute="top" secondItem="3u6-AL-c1c" secondAttribute="top" id="VPc-jd-0rZ"/>
                             <constraint firstItem="OCa-Mb-wlj" firstAttribute="leading" secondItem="3u6-AL-c1c" secondAttribute="leading" constant="10" id="aGF-p8-obS"/>
                             <constraint firstItem="QOb-lA-QsE" firstAttribute="trailing" secondItem="3u6-AL-c1c" secondAttribute="trailing" id="c5d-dA-aNd"/>
                             <constraint firstItem="QOb-lA-QsE" firstAttribute="top" secondItem="OCa-Mb-wlj" secondAttribute="bottom" constant="-56" id="g1r-Q2-Qf7"/>
                             <constraint firstItem="3u6-AL-c1c" firstAttribute="trailing" secondItem="OCa-Mb-wlj" secondAttribute="trailing" constant="10" id="lnV-HE-gGH"/>
-                            <constraint firstItem="Ylu-mC-liD" firstAttribute="top" secondItem="3u6-AL-c1c" secondAttribute="top" id="nLs-5L-Hg5"/>
+                            <constraint firstItem="QOb-lA-QsE" firstAttribute="bottom" secondItem="3u6-AL-c1c" secondAttribute="bottom" constant="400" id="qR3-Rt-xvS"/>
+                            <constraint firstItem="gDm-7Z-Fqd" firstAttribute="leading" secondItem="3u6-AL-c1c" secondAttribute="leading" id="yt9-pF-TM0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3u6-AL-c1c"/>
                     </view>
@@ -118,6 +134,8 @@
                         <outlet property="cardCollectionViewHeightConstraint" destination="54s-yp-0rU" id="zn3-Ss-7Ue"/>
                         <outlet property="collectionView" destination="QOb-lA-QsE" id="xRH-66-PpL"/>
                         <outlet property="pannableView" destination="OCa-Mb-wlj" id="cZU-Md-NkG"/>
+                        <outlet property="scrollView" destination="gDm-7Z-Fqd" id="azU-GL-zQL"/>
+                        <outlet property="svgView" destination="Ylu-mC-liD" id="h0K-gp-TaF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axj-0f-yxt" userLabel="First Responder" sceneMemberID="firstResponder"/>
