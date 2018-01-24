@@ -9,7 +9,7 @@
 import UIKit
 
 class MapCardCell: UICollectionViewCell {
-    
+    @IBOutlet weak var cardContainerView: UIView!
     @IBOutlet weak var topCellCardView: UIView!
     
     override func awakeFromNib() {

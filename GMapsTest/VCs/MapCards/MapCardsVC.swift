@@ -66,7 +66,11 @@ class MapCardsVC: UIViewController {
 extension MapCardsVC : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mapCardCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mapCardCell", for: indexPath) as! MapCardCell
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "cardInfoVC")
+        let nav : UINavigationController = UINavigationController(rootViewController: vc!)
+        vc?.view.bounds = cell.cardContainerView.bounds
+        cell.cardContainerView.addSubview(nav.view)
         return cell
     }
     
