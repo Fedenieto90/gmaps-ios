@@ -18,10 +18,14 @@ class MapCardsVC: UIViewController {
     var currentPositionTouched: CGPoint!
     var halfScreen : CGFloat!
     
+    var provinces = [Province]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cardCollectionViewHeightConstraint.constant = self.view.bounds.size.height
         addPanGesture()
+        
+        provinces = ProvincesHelper.provinces()
     }
     
     func addPanGesture() {
@@ -67,15 +71,18 @@ extension MapCardsVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mapCardCell", for: indexPath) as! MapCardCell
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "cardInfoVC")
-        let nav : UINavigationController = UINavigationController(rootViewController: vc!)
-        vc?.view.bounds = cell.cardContainerView.bounds
-        cell.cardContainerView.addSubview(nav.view)
+        //Instantiate
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "cardInfoVC") as! CardVC
+        let nav = UINavigationController(rootViewController: vc)
+        vc.province = provinces[indexPath.row]
+        cell.parentVC = self
+        nav.navigationBar.barTintColor = UIColor.white
+        cell.activeController = nav
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return ProvincesHelper.provinces().count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

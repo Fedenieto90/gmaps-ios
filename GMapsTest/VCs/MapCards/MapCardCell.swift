@@ -9,8 +9,17 @@
 import UIKit
 
 class MapCardCell: UICollectionViewCell {
+    
     @IBOutlet weak var cardContainerView: UIView!
     @IBOutlet weak var topCellCardView: UIView!
+    
+    var parentVC : UIViewController!
+    
+    var activeController: UIViewController? {
+        didSet {
+            self.replaceActiveViewController(oldVC: oldValue, newVC: activeController)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,6 +43,29 @@ class MapCardCell: UICollectionViewCell {
         self.layer.shadowOpacity = 1.0
         self.layer.masksToBounds = false
         self.layer.shadowPath = UIBezierPath(roundedRect:self.bounds, cornerRadius:self.contentView.layer.cornerRadius).cgPath
+    }
+    
+    private func replaceActiveViewController(oldVC: UIViewController?, newVC: UIViewController?)
+    {
+        if oldVC == newVC {
+            return
+        }
+        
+        if oldVC != nil {
+            oldVC!.willMove(toParentViewController: nil)
+            oldVC!.view.removeFromSuperview()
+            oldVC!.removeFromParentViewController()
+            NSLog("Removed %@", oldVC!)
+        }
+        
+        if newVC != nil {
+            newVC!.willMove(toParentViewController: parentVC)
+            parentVC.addChildViewController(newVC!)
+            newVC!.view.frame = self.cardContainerView.bounds
+            self.cardContainerView.addSubview(newVC!.view)
+            newVC!.didMove(toParentViewController: parentVC)
+            NSLog("Added %@", newVC!)
+        }
     }
     
 }

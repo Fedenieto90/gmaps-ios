@@ -14,6 +14,7 @@
 		8B09638120111C8B0063C95D /* LineVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09638020111C8B0063C95D /* LineVehicle.swift */; };
 		8B1BC7912019048200858B6C /* CardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BC7902019048200858B6C /* CardVC.swift */; };
 		8B1BC793201906FD00858B6C /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BC792201906FD00858B6C /* CardCell.swift */; };
+		8B1BC797201922F500858B6C /* CardDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1BC796201922F500858B6C /* CardDetailVC.swift */; };
 		8B99A37C20090DF00088B849 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B99A37B20090DF00088B849 /* Map.storyboard */; };
 		8B99A37E20090E040088B849 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B99A37D20090E040088B849 /* MapVC.swift */; };
 		8B99A382200927000088B849 /* argentinaLow.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8B99A381200927000088B849 /* argentinaLow.svg */; };
@@ -77,6 +78,7 @@
 		8B09638020111C8B0063C95D /* LineVehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineVehicle.swift; sourceTree = "<group>"; };
 		8B1BC7902019048200858B6C /* CardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardVC.swift; sourceTree = "<group>"; };
 		8B1BC792201906FD00858B6C /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		8B1BC796201922F500858B6C /* CardDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailVC.swift; sourceTree = "<group>"; };
 		8B99A37B20090DF00088B849 /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		8B99A37D20090E040088B849 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		8B99A381200927000088B849 /* argentinaLow.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = argentinaLow.svg; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				8BC73A072018B3A10051DFAA /* MapCardCell.swift */,
 				8B1BC7902019048200858B6C /* CardVC.swift */,
 				8B1BC792201906FD00858B6C /* CardCell.swift */,
+				8B1BC796201922F500858B6C /* CardDetailVC.swift */,
 			);
 			path = MapCards;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				8BF8800F200FD49E008132D8 /* Leg.swift in Sources */,
 				8BC739FA20176F890051DFAA /* CustomPulleyVC.swift in Sources */,
 				8B1BC7912019048200858B6C /* CardVC.swift in Sources */,
+				8B1BC797201922F500858B6C /* CardDetailVC.swift in Sources */,
 				8BB76D7C200510660000E3FF /* ViewController.swift in Sources */,
 				8B1BC793201906FD00858B6C /* CardCell.swift in Sources */,
 				8BE6802F200D34FD00CAA057 /* Province.swift in Sources */,
