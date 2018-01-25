@@ -9,6 +9,7 @@
 import UIKit
 
 class MapCardCell: UICollectionViewCell {
+    @IBOutlet weak var shadowView: UIView!
     
     @IBOutlet weak var cardContainerView: UIView!
     @IBOutlet weak var topCellCardView: UIView!
@@ -27,18 +28,16 @@ class MapCardCell: UICollectionViewCell {
     }
     
     func roundTopCellViewCorners() {
-        // corner radius
-        self.layer.cornerRadius = 10
-        
         // border
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.cornerRadius = 8
         
         // shadow
         self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 3, height: 3)
+        self.layer.shadowOffset = CGSize(width: 2, height: 3)
         self.layer.shadowOpacity = 0.7
         self.layer.shadowRadius = 4.0
+        self.layer.masksToBounds = false
+        self.cardContainerView.layer.masksToBounds = true
     }
     
     

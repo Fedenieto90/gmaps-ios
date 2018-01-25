@@ -60,6 +60,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="337" height="581"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2q2-bM-1ba" userLabel="CellShadowView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="337" height="581"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiM-Cz-SHR">
                                                     <rect key="frame" x="0.0" y="0.0" width="337" height="50"/>
                                                     <subviews>
@@ -90,16 +94,21 @@
                                         </view>
                                         <color key="backgroundColor" red="1" green="0.29803921570000003" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="2q2-bM-1ba" firstAttribute="top" secondItem="GYD-c9-Ilg" secondAttribute="top" id="1Ok-xt-dgd"/>
                                             <constraint firstItem="V9N-Z7-NXG" firstAttribute="top" secondItem="OiM-Cz-SHR" secondAttribute="bottom" id="33f-Wk-XIi"/>
                                             <constraint firstItem="V9N-Z7-NXG" firstAttribute="leading" secondItem="GYD-c9-Ilg" secondAttribute="leading" id="7bz-fE-2z2"/>
                                             <constraint firstItem="OiM-Cz-SHR" firstAttribute="leading" secondItem="GYD-c9-Ilg" secondAttribute="leading" id="A6z-WT-nln"/>
+                                            <constraint firstItem="2q2-bM-1ba" firstAttribute="leading" secondItem="GYD-c9-Ilg" secondAttribute="leading" id="GK0-WE-jbN"/>
                                             <constraint firstAttribute="trailing" secondItem="V9N-Z7-NXG" secondAttribute="trailing" id="LFY-MJ-yYU"/>
+                                            <constraint firstAttribute="bottom" secondItem="2q2-bM-1ba" secondAttribute="bottom" id="RlF-M3-wd3"/>
                                             <constraint firstAttribute="bottom" secondItem="V9N-Z7-NXG" secondAttribute="bottom" id="rrl-9Z-EJW"/>
                                             <constraint firstItem="OiM-Cz-SHR" firstAttribute="top" secondItem="GYD-c9-Ilg" secondAttribute="top" id="scS-n9-Q95"/>
                                             <constraint firstAttribute="trailing" secondItem="OiM-Cz-SHR" secondAttribute="trailing" id="stP-1P-cZx"/>
+                                            <constraint firstAttribute="trailing" secondItem="2q2-bM-1ba" secondAttribute="trailing" id="te1-U3-o9d"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="cardContainerView" destination="V9N-Z7-NXG" id="DrM-4v-3OK"/>
+                                            <outlet property="shadowView" destination="2q2-bM-1ba" id="Dib-d5-cV5"/>
                                             <outlet property="topCellCardView" destination="OiM-Cz-SHR" id="dn3-Qs-uw6"/>
                                         </connections>
                                     </collectionViewCell>
