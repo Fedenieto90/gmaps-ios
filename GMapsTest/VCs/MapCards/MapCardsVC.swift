@@ -27,11 +27,21 @@ class MapCardsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         cardCollectionViewHeightConstraint.constant = self.view.bounds.size.height
+        
         //Add cards pan gesture
         addPanGesture()
+        
         //Provinces
         provinces = ProvincesHelper.provinces()
+        
+        //Configure touch handlers
         configureTouchHandlers()
+        
+        //Select first province
+        selectProvince(nodeTag: provinces.first!.id)
+        
+        //ScrollView content insets
+        self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
     }
     
     func addPanGesture() {
