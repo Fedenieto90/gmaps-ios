@@ -27,9 +27,11 @@ class MapCardsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         cardCollectionViewHeightConstraint.constant = self.view.bounds.size.height
+        //Add cards pan gesture
         addPanGesture()
-        
+        //Provinces
         provinces = ProvincesHelper.provinces()
+        configureTouchHandlers()
     }
     
     func addPanGesture() {
@@ -73,11 +75,14 @@ class MapCardsVC: UIViewController {
     //MARK : - Select Provinces
     
     func configureTouchHandlers() {
-        
         for province in self.provinces {
             svgView.node.nodeBy(tag: province.id)?.onTouchPressed({ (touch) in
                 //Print selected province tag
                 print(province.id)
+                
+                //Deselect all provinces
+                self.deselectAllProvinces()
+                
                 //Select province
                 self.selectProvince(nodeTag: province.id)
             })
@@ -87,8 +92,23 @@ class MapCardsVC: UIViewController {
     func selectProvince(nodeTag : String) {
         let provinceShape = self.svgView.node.nodeBy(tag: nodeTag) as! Shape
         provinceShape.fill = Color.red
+        selectProvinceCard(nodeTag: nodeTag)
     }
     
+    func deselectAllProvinces() {
+        for province in provinces {
+            let provinceShape = self.svgView.node.nodeBy(tag: province.id) as! Shape
+            provinceShape.fill = Color.rgb(r: 204, g: 204, b: 204)
+        }
+    }
+    
+    func selectProvinceCard(nodeTag : String) {
+        if let i = provinces.index(where: { $0.id == nodeTag }) {
+            let indexPath = IndexPath(row: i, section: 0)
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+    }
+
 }
 
 extension MapCardsVC : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -124,6 +144,7 @@ extension MapCardsVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let province = provinces[(self.collectionView.indexPathsForVisibleItems.first?.row)!]
+        deselectAllProvinces()
         self.selectProvince(nodeTag: province.id)
     }
     
