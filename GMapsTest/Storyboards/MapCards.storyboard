@@ -41,7 +41,7 @@
                                 </constraints>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QOb-lA-QsE" userLabel="CardsCollectionView">
-                                <rect key="frame" x="0.0" y="447" width="375" height="600"/>
+                                <rect key="frame" x="0.0" y="464" width="375" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="600" id="54s-yp-0rU"/>
@@ -110,24 +110,24 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCa-Mb-wlj">
-                                <rect key="frame" x="20" y="403" width="335" height="100"/>
+                                <rect key="frame" x="20" y="474" width="335" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Zsn-sG-LZ1"/>
+                                    <constraint firstAttribute="height" constant="60" id="Zsn-sG-LZ1"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QOb-lA-QsE" firstAttribute="leading" secondItem="3u6-AL-c1c" secondAttribute="leading" id="5aG-Fo-j2a"/>
+                            <constraint firstItem="QOb-lA-QsE" firstAttribute="top" secondItem="3u6-AL-c1c" secondAttribute="top" constant="400" id="If4-Nb-12m"/>
                             <constraint firstItem="gDm-7Z-Fqd" firstAttribute="bottom" secondItem="3u6-AL-c1c" secondAttribute="bottom" id="N1q-DV-x8V"/>
                             <constraint firstItem="gDm-7Z-Fqd" firstAttribute="trailing" secondItem="3u6-AL-c1c" secondAttribute="trailing" id="SRX-w3-7GF"/>
                             <constraint firstItem="gDm-7Z-Fqd" firstAttribute="top" secondItem="3u6-AL-c1c" secondAttribute="top" id="VPc-jd-0rZ"/>
                             <constraint firstItem="OCa-Mb-wlj" firstAttribute="leading" secondItem="3u6-AL-c1c" secondAttribute="leading" constant="20" id="aGF-p8-obS"/>
                             <constraint firstItem="QOb-lA-QsE" firstAttribute="trailing" secondItem="3u6-AL-c1c" secondAttribute="trailing" id="c5d-dA-aNd"/>
-                            <constraint firstItem="QOb-lA-QsE" firstAttribute="top" secondItem="OCa-Mb-wlj" secondAttribute="bottom" constant="-56" id="g1r-Q2-Qf7"/>
+                            <constraint firstItem="QOb-lA-QsE" firstAttribute="top" secondItem="OCa-Mb-wlj" secondAttribute="bottom" constant="-70" id="g1r-Q2-Qf7"/>
                             <constraint firstItem="3u6-AL-c1c" firstAttribute="trailing" secondItem="OCa-Mb-wlj" secondAttribute="trailing" constant="20" id="lnV-HE-gGH"/>
-                            <constraint firstItem="QOb-lA-QsE" firstAttribute="bottom" secondItem="3u6-AL-c1c" secondAttribute="bottom" constant="380" id="qR3-Rt-xvS"/>
                             <constraint firstItem="gDm-7Z-Fqd" firstAttribute="leading" secondItem="3u6-AL-c1c" secondAttribute="leading" id="yt9-pF-TM0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3u6-AL-c1c"/>
@@ -135,6 +135,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="cardCollectionViewHeightConstraint" destination="54s-yp-0rU" id="zn3-Ss-7Ue"/>
+                        <outlet property="cardTopConstraint" destination="If4-Nb-12m" id="1AK-lc-ybl"/>
                         <outlet property="collectionView" destination="QOb-lA-QsE" id="xRH-66-PpL"/>
                         <outlet property="pannableView" destination="OCa-Mb-wlj" id="cZU-Md-NkG"/>
                         <outlet property="scrollView" destination="gDm-7Z-Fqd" id="azU-GL-zQL"/>

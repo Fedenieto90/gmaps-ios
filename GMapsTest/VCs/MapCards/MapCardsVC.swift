@@ -11,11 +11,12 @@ import Macaw
 
 class MapCardsVC: UIViewController {
     
+    @IBOutlet weak var cardTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var cardCollectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var pannableView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var originalPosition: CGPoint!
+    var originalCardTopConstraint: CGFloat!
     var currentPositionTouched: CGPoint!
     var halfScreen : CGFloat!
     
@@ -26,6 +27,8 @@ class MapCardsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cardTopConstraint.constant = self.view.bounds.height - 320
         cardCollectionViewHeightConstraint.constant = self.view.bounds.size.height
         
         //Add cards pan gesture
@@ -54,29 +57,28 @@ class MapCardsVC: UIViewController {
     @objc func handlePan(_ panGesture: UIPanGestureRecognizer) {
         let translation = panGesture.translation(in: view)
         if panGesture.state == .began {
-            if originalPosition == nil {
-             originalPosition = pannableView.center
+            if originalCardTopConstraint == nil {
+                originalCardTopConstraint = self.cardTopConstraint.constant
             }
             currentPositionTouched = pannableView.center
         } else if panGesture.state == .changed {
-           pannableView.center = CGPoint(x: currentPositionTouched.x, y: currentPositionTouched.y + translation.y)
-            collectionView.frame.origin = CGPoint(x: 0, y: currentPositionTouched.y + translation.y)
+            cardTopConstraint.constant = currentPositionTouched.y + translation.y
         } else if panGesture.state == .ended {
             let panGestureLocation = panGesture.location(in: self.view.window).y
             let velocity = panGesture.velocity(in: self.view)
             if ((panGestureLocation < halfScreen && velocity.y >= 0) || velocity.y > 0) {
+                self.cardTopConstraint.constant = self.originalCardTopConstraint
                 UIView.animate(withDuration: 0.2, animations: {
-                    self.pannableView.center = CGPoint(x: self.originalPosition.x, y: self.originalPosition.y)
-                    self.collectionView.frame.origin = CGPoint(x: 0, y: self.originalPosition.y)
+                    self.view.layoutIfNeeded()
                 }, completion: { (isCompleted) in
                     if isCompleted {
-                    
+                        //Do something when animation completes
                     }
                 })
             } else {
+                self.cardTopConstraint.constant = 20
                 UIView.animate(withDuration: 0.2, animations: {
-                    self.pannableView.center =  CGPoint(x: self.originalPosition.x, y: self.view.frame.origin.y + 100)
-                     self.collectionView.frame.origin = CGPoint(x: 0, y: self.view.frame.origin.y + 100)
+                    self.view.layoutIfNeeded()
                 })
             }
         }
@@ -141,7 +143,7 @@ extension MapCardsVC : UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.bounds.size.width - 40, height: self.view.bounds.size.height - 20)
+        return CGSize(width: self.view.bounds.size.width - 40, height: self.collectionView.bounds.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
